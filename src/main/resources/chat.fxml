@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<?import javafx.scene.control.ListView?>
+<GridPane fx:controller="com.github.shashi.chatapp.client.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <Button fx:id="sendButton" onAction="#onButtonClicked" mnemonicParsing="false" text="Send" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+    <ListView fx:id="listView" prefHeight="200.0" prefWidth="400.0" />
+    <TextField fx:id="name" GridPane.rowIndex="3" />
+    <TextField fx:id="textField" GridPane.rowIndex="4" />
+
+
+</GridPane>
