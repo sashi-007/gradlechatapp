@@ -11,6 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Properties;
+
 public class chatTask<Controller> extends Service<ObservableList<String>> {
 
     private String message;
@@ -18,7 +25,11 @@ public class chatTask<Controller> extends Service<ObservableList<String>> {
     private final com.github.shashi.chatapp.client.Controller controller;
     ObservableList<String> messages = FXCollections.observableArrayList();
 
-    ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",50051)
+    //added to server details from config
+
+
+
+    ManagedChannel channel = ManagedChannelBuilder.forAddress("34.100.138.155",50051)
             .usePlaintext()
             .build();
 

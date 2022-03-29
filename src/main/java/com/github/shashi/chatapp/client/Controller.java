@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Properties;
 
 
@@ -58,28 +59,42 @@ public class Controller {
         URI configFileUri = null;
         try {
             configFileUri = getClass().getClassLoader().getResource("server.properties").toURI();
+
         } catch (URISyntaxException e) {
+            System.out.println("ERROR in getting server.properties");
             e.printStackTrace();
         }
-        File configFile = new File(configFileUri);
+        System.out.println("server.properties URI found " +configFileUri.toString());
+        //File configFile = new File(configFileUri);
 
         Properties properties = new Properties();
         try{
-            fis = new FileInputStream(configFile);
+            //fis = new FileInputStream(configFile);
 
-            properties.load(fis);
-        }catch (IOException e){
+            //properties.load(fis);
+            properties.load(getClass().getClassLoader().getResourceAsStream("server.properties"));
+        }catch (Exception e) {
+            System.out.println("error loading server.properties");
             e.printStackTrace();
-        }finally {
+
+        }
+        finally {
             if(fis != null){
                 try{
                     fis.close();
                 }catch (IOException e){}
             }
         }
+        System.out.println("server.properties loaded");
 
         String serverName = properties.getProperty("server");
-        int port =  Integer.parseInt(properties.getProperty("port")) ;
+        int port = 0;
+        try {
+            port = Integer.parseInt(properties.getProperty("port"));
+        }catch (Exception e){
+            System.out.println("Error loading port value from server.properties");
+            e.printStackTrace();
+        }
 
 
         System.out.println("server = " + serverName);
@@ -120,7 +135,7 @@ public class Controller {
             }
         });
 
-
+        System.out.println("end of initialise method");
     }
 
     @FXML
